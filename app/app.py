@@ -43,9 +43,14 @@ def save_and_display_gradcam(img, heatmap, alpha=0.4):
     )
 
     return superimposed_img
+import os
+from PIL import Image
+
+base_dir = os.path.dirname(__file__)
+icon_path = os.path.join(base_dir, "img", "mdc.png")
+icon = Image.open(icon_path)
 
 
-icon = Image.open("app/img/mdc.png")
 st.set_page_config(
     page_title="Severity Analysis of Arthrosis in the Knee",
     page_icon=icon,
@@ -53,7 +58,11 @@ st.set_page_config(
 
 class_names = ["Healthy", "Doubtful", "Minimal", "Moderate", "Severe"]
 
-model = tf.keras.models.load_model("./src/models/model_Xception_ft.hdf5")
+#model = tf.keras.models.load_model("./src/models/model_Xception_ft.hdf5")
+model = tf.keras.models.load_model("C:/Users/aniru/Downloads/knee_OA_dl_app/src/model_Xception_ft.hdf5")
+
+
+
 target_size = (224, 224)
 
 # Grad-CAM
